@@ -1,20 +1,19 @@
 name: niks
 description: A lib that helps you create layer oriented canvas applications
 version: 0.0.1
-author:
-homepage:
+author: Renan C. Araújo <renan@caraujo.me>
+homepage: https://github.com/renancaraujo/bitmap
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-  meta:
+  meta: ^1.1.7
   rebloc: ^0.3.0
-  uuid: 2.0.2
+  uuid: ^2.0.2
   flutter:
     sdk: flutter
-  bitmap:
-    path: ../bitmap_internal
+  bitmap: ^0.0.3
 
 dev_dependencies:
   flutter_test:

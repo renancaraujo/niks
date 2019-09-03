@@ -32,37 +32,30 @@ class NiksOptions {
 class Niks {
   Niks.blank(this.options)
       : state = NiksState(),
-        _layerDefinition = NiksLayerDefinition()
-          ..installLayer(RectLayerInstallation());
-
-  Niks.hydrate(Map<String, dynamic> dehydratedNiks)
-      : state = NiksState(),
-        _layerDefinition = NiksLayerDefinition()
+        layerDefinition = NiksLayerDefinition()
           ..installLayer(RectLayerInstallation())
-          ..installLayer(TextLayerInstallation()),
-        options = NiksOptions(
-          width: dehydratedNiks[constants.niksProjectWidthKey],
-          height: dehydratedNiks[constants.niksProjectHeightKey],
-        ) {
-    final snapshot = NiksStateSnapshot.hydrate(
-      dehydratedNiks[constants.niksStateKey],
-      _layerDefinition,
-    );
-    state.restoreFromSnapshot(snapshot);
-  }
+          ..installLayer(TextLayerInstallation());
 
   final NiksOptions options;
 
   final NiksState state;
-  final NiksLayerDefinition _layerDefinition;
+  final NiksLayerDefinition layerDefinition;
 
   void addLayerOnTop(NiksLayer layer) {
     _processLayer(layer);
     state.addOnTop(layer);
   }
 
+  void hydrate(Map<String, dynamic> dehydratedNiks) {
+    final snapshot = NiksStateSnapshot.hydrate(
+      dehydratedNiks[constants.niksStateKey],
+      layerDefinition,
+    );
+    state.restoreFromSnapshot(snapshot);
+  }
+
   void _processLayer(NiksLayer layer) {
-    _layerDefinition.verifyLayer(layer.createSnapshot().layerIdentity);
+    layerDefinition.verifyLayer(layer.createSnapshot().layerIdentity);
     if (layer.uuid != null) {
       return;
     }
@@ -99,5 +92,5 @@ class Niks {
   }
 
   void installLayer(NiksLayerInstallation installation) =>
-      _layerDefinition.installLayer(installation);
+      layerDefinition.installLayer(installation);
 }

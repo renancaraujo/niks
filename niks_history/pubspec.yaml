@@ -1,0 +1,22 @@
+name: niks_history
+description: Enables time travel on an niks editor
+version: 0.0.1
+author: Renan C. Araújo <renan@caraujo.me>
+homepage: https://github.com/renancaraujo/niks
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  rebloc: ^0.3.0
+  niks: ^0.0.2
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+

@@ -1,6 +1,6 @@
 name: niks
 description: A lib that helps you create layer oriented canvas applications
-version: 0.0.2
+version: 0.0.3
 author: Renan C. Araújo <renan@caraujo.me>
 homepage: https://github.com/renancaraujo/niks
 

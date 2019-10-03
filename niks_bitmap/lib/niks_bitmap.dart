@@ -96,10 +96,11 @@ class BitmapLayer implements NiksLayer {
     }
 
     canvas.drawImageRect(
-        resolvedImage,
-        Rect.fromLTWH(0, 0, bitmap.width.toDouble(), bitmap.height.toDouble()),
-        Rect.fromLTWH(coordinates.dx, coordinates.dy, size.width, size.height),
-        ui.Paint(),);
+      resolvedImage,
+      Rect.fromLTWH(0, 0, bitmap.width.toDouble(), bitmap.height.toDouble()),
+      Rect.fromLTWH(coordinates.dx, coordinates.dy, size.width, size.height),
+      ui.Paint(),
+    );
     _pendingRepaint = false;
   }
 
@@ -148,14 +149,13 @@ class BitmapLayer implements NiksLayer {
   }
 
   void _calmFiltersDown() {
-    for(BitmapLayerFilter filter in _filters.values) {
+    for (BitmapLayerFilter filter in _filters.values) {
       filter.shouldRecompute = false;
     }
   }
 }
 
 class BitmapLayerSnapshot implements NiksLayerSnapshot<BitmapLayer> {
-
   BitmapLayerSnapshot(BitmapLayer layer)
       : uuid = layer.uuid,
         width = layer.size.width,
@@ -177,9 +177,9 @@ class BitmapLayerSnapshot implements NiksLayerSnapshot<BitmapLayer> {
         filters = (dehydratedLayer[filtersKey])
             .map<String, BitmapLayerFilterSnapshot>(
                 (String filterKey, dynamic dehydratedFilter) {
-              return MapEntry<String, BitmapLayerFilterSnapshot>(
-                  filterKey, hydrateFilter(dehydratedFilter));
-            });
+          return MapEntry<String, BitmapLayerFilterSnapshot>(
+              filterKey, hydrateFilter(dehydratedFilter));
+        });
 
   @override
   String get layerIdentity => bitmapIdentity;

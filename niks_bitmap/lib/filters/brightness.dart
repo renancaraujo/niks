@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:bitmap/filters.dart';
+import 'package:bitmap/transformations.dart';
 
 import 'filter.dart';
 
@@ -30,7 +30,7 @@ class BrightnessFilter extends BitmapLayerFilter {
 
   @override
   void apply(Uint8List bitmap, int width, int height, int pixelLength) {
-    setBrightnessFunction(bitmap, _brightnessRate);
+    brightnessCore(bitmap, _brightnessRate);
   }
 }
 

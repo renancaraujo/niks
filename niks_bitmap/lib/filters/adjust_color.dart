@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:bitmap/filters.dart';
+import 'package:bitmap/transformations.dart';
 import 'filter.dart';
 
 const adjustColorIdentity = 'adjustColorFilter';
@@ -64,7 +64,7 @@ class AdjustColorFilter extends BitmapLayerFilter {
 
   @override
   void apply(Uint8List bitmap, int width, int height, int pixelLength) {
-    adjustColorFunction(
+    adjustColorCore(
       bitmap,
       blacks: _blacks,
       whites: _whites,

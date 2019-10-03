@@ -99,7 +99,7 @@ class BitmapLayer implements NiksLayer {
         resolvedImage,
         Rect.fromLTWH(0, 0, bitmap.width.toDouble(), bitmap.height.toDouble()),
         Rect.fromLTWH(coordinates.dx, coordinates.dy, size.width, size.height),
-        ui.Paint());
+        ui.Paint(),);
     _pendingRepaint = false;
   }
 
@@ -136,10 +136,10 @@ class BitmapLayer implements NiksLayer {
   Future<Uint8List> computeBitmap([Bitmap bitmap]) async {
     bitmap = bitmap ?? this.bitmap;
     return await compute(applyFiltersIsolate, [
-      bitmap.contentByteData,
+      bitmap.content,
       bitmap.width,
       bitmap.height,
-      bitmap.pixelLength,
+      bitmap.size,
       _filters.values
           .map<Map<String, dynamic>>(
               (bitmapFilter) => bitmapFilter.createSnapshot().dehydrate())
@@ -249,6 +249,7 @@ Future<ui.Image> loadImage(Uint8List img) async {
   return imageCompleter.future;
 }
 
+/* A method to be run on a isolate that will apply all transformations */
 Future<Uint8List> applyFiltersIsolate(List operationData) async {
   final Uint8List byteData = operationData[0];
   final int width = operationData[1];
@@ -258,7 +259,7 @@ Future<Uint8List> applyFiltersIsolate(List operationData) async {
   for (int i = 0; i < filters.length; i++) {
     FilterApplier(filters[i])..apply(byteData, width, height, pixelLength);
   }
-  return BitmapFile(Bitmap(width, height, byteData)).bitmapWithHeader;
+  return Bitmap.fromHeadless(width, height, byteData).buildHeaded();
 }
 
 class FilterApplier {

@@ -1,6 +1,6 @@
 name: niks_bitmap
 description: Use niks with bitmap layers
-version: 0.0.2-next
+version: 0.0.3
 author: Renan C. Araújo <renan@caraujo.me>
 homepage: https://github.com/renancaraujo/niks
 
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bitmap: ^0.0.4-next2
+  bitmap: ^0.0.5
   niks: ^0.0.2
 
 dev_dependencies:
